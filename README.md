@@ -23,6 +23,13 @@ The default configuration directory is `$XDG_CONFIG_HOME/screenlayout`. If `$XDG
 
 The file `$XDG_CONFIG_HOME/screenlayout/post` can be used to execute commands after the screenlayout has changed. It must be an executable shell script.
 
+## Running
+
+```shell
+$ crystal run main.cr
+$ crystal run main.cr -- homeoffice
+```
+
 ## Reasoning
 
 `screenlayout` could easily be implemented using a simple bash script. This project merely exists to try out [crystal](https://crystal-lang.org).
