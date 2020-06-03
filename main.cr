@@ -24,16 +24,19 @@ def screenlayout(name)
 end
 
 def run_post_script
-  script_path = "#{config_directory}/post"
+  script_path = File.join(config_directory, "post")
 
-  if File.exist?(script_path)
+  puts script_path
+  if File.exists?(script_path)
     puts "Running post script.."
     system script_path
   end
 end
 
 def config_directory
-  ENV["XDG_CONFIG_HOME"].presence || "#{ENV["HOME"]}/.config"
+  system_config = ENV.fetch("XDG_CONFIG_HOME", "#{ENV["HOME"]}/.config")
+
+  File.join(system_config, "screenlayout")
 end
 
 if ARGV.size == 0
@@ -45,6 +48,8 @@ elsif ARGV.size == 1
   if layout
     puts "Switching to #{new_layout}.."
     system layout[:script]
+
+    run_post_script
   else
     puts "Layout #{new_layout} not found"
     exit 1
